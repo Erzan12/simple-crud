@@ -1,21 +1,27 @@
+//loading environtment variables
 require("dotenv").config();
-const express = require("express");
-const { PrismaClient } = require("@prisma/client");
-const { Pool } = require("pg");
-const { PrismaPg } = require("@prisma/adapter-pg");
+
+//import dependencies
+const express = require("express"); //http or web server 
+const { PrismaClient } = require("@prisma/client"); //prisma orm client
+const { Pool } = require("pg"); //postgreslq connection pool
+const { PrismaPg } = require("@prisma/adapter-pg"); //prisma adapter that tells prisma to use pg
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
 
+//connecting prisma to postgre sql
 const adapter = new PrismaPg(pool);
-
 const prisma = new PrismaClient({ adapter });
 
+//creating express app
 const app = express();
 app.use(express.json());
 
+//start server
 app.listen(3000, () => {
+    //return log to see if port 3000 is running successfully
   console.log("Server running on http://localhost:3000");
 });
 
