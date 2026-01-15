@@ -23,3 +23,5 @@ run "node index.js"
 
 To view DB table and properties
 npx prisma studio --url "postgresql://postgres:postgres@localhost:5432/simplecrud"
+or
+npx prisma studio --config ./prisma.config.ts
