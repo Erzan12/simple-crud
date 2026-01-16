@@ -15,6 +15,23 @@ generator client {
 model User {
   id        Int      @id @default(autoincrement())
   email     String   @unique
-  name      String?
+  username  String
   createdAt DateTime @default(now())
+
+  //relation
+  person    Person?
+}
+
+model Person {
+  id            Int      @id @default(autoincrement())
+  userId        Int      @unique
+  name          String
+  dateOfBirth   DateTime?
+  age           Int?
+  gender        String?
+  address       String?
+  phoneNumber   String?
+
+  //relation
+  user          User    @relation(fields: [userId], references: [id], onDelete: Cascade)  
 }
