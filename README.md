@@ -1,27 +1,63 @@
-# simple-crud
+# Set Up
 
-1. first create .env file use this credential
-DATABASE_URL="postgresql://postgres:postgres@localhost:5432/simplecrud"
-2. next run "npm install" to install required dependencies
-3. run migrations "npx prisma migrate dev --name init"
-4. next run "npx prisma generate" to generate prisma client
+1. Clone the repository or create your own project directory
+git clone
+cd simple-crud
 
-Set up PgAdmin and postgres
-1. install first postgres 17 or latest version
-2. install pgadmin4 to add server for database
-3. add new database use "PostgreSQL 17" 
-   add host name "localhost"
-   add port "5432"
-   add maintenance port "postgres"
-   add username "postgres"
-   add password "postgres"
+2. Install PostgreSQL & pgAdmin
 
-To access endpoints use Postman app
+ - Install PostgreSQL 17 (or latest)
 
-To run Simple CRUD API
-run "node index.js"
+ - Install pgAdmin 4
 
-To view DB table and properties
-npx prisma studio --url "postgresql://postgres:postgres@localhost:5432/simplecrud"
-or
-npx prisma studio --config ./prisma.config.ts
+ - Open pgAdmin and register a new server:
+
+    - Host: localhost
+
+    - Port: 5432
+
+    - Maintenance DB: postgres
+
+    - Username: postgres
+
+    - Password: postgres
+
+ - Create a new database named:
+   - simplecrud
+
+3. Create Environment Variables
+   - Create a .env file in the root directory:
+   - DATABASE_URL="postgresql://postgres:postgres@localhost:5432/simplecrud"
+
+# Installing Dependencies (Manual Way)
+4. Initialize Node Project
+   - npm init -y
+
+5. Install Runtime Dependencies
+   - npm install express pg dotenv @prisma/client
+
+6. Install Development Dependencies
+   - npm install --save-dev prisma nodemon
+
+# Prisma Setup
+7. Initialize Prisma
+   - npx prisma init
+
+8. Run Database Migration
+   - npx prisma migrate dev --name init
+
+9. Generate Prisma Client
+   - npx prisma generate
+
+10. View Database with Prisma Studio (optional) 
+   - npx prisma studio
+      or using config:
+   - npx prisma studio --config ./prisma.config.ts
+
+# Running the API Server
+   - node index.js
+   or(if using nodemon):
+   - npx nodemon index.js
+
+   Server runs at:
+   - http://localhost:3000
