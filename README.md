@@ -37,7 +37,7 @@ cd simple-crud
    - npm install express pg dotenv @prisma/client @prisma/adapter-pg
 
 6. Install Development Dependencies
-   - npm install --save-dev prisma nodemon @types/node
+   - npm install --save-dev prisma nodemon
 
 # Prisma Setup
 7. Initialize Prisma

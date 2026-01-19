@@ -41,7 +41,7 @@ router.get("/persons/:userId", async (req, res) => {
   }
 });
 
-router.post("/person/:userId", async (req, res) => {
+router.post("/persons/:userId", async (req, res) => {
   const prisma = req.app.locals.prisma;
   const userId = Number(req.params.userId);
   const { name, age } = req.body;
