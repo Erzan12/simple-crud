@@ -61,3 +61,9 @@ cd simple-crud
 
    Server runs at:
    - http://localhost:3000
+
+11. crucial detail in schema 
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
