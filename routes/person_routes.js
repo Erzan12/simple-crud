@@ -41,4 +41,49 @@ router.get("/persons/:userId", async (req, res) => {
   }
 });
 
+router.post("/person/:userId", async (req, res) => {
+  const prisma = req.app.locals.prisma;
+  const userId = Number(req.params.userId);
+  const { name, age } = req.body;
+
+  try {
+    //check if user exists
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      include: { person: true },
+    });
+
+    if (!user) {
+      return res.status(404).json({
+        error: "User not found",
+      });
+    }
+
+    //check if person already exists
+    if (user.person) {
+      return res.status(400).json({
+        error: "Person already exists for this user",
+      });
+    }
+
+    //create person
+    const person = await prisma.person.create({
+      data: {
+        name,
+        age,
+        user: {
+          connect: { id: userId },
+        },
+      },
+    });
+
+    return res.status(201).json(person);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      error: "Internal server error",
+    });
+  }
+});
+
 module.exports = router;
