@@ -4,6 +4,11 @@ require("dotenv").config();
 //import dependencies
 const express = require("express");
 const { PrismaClient } = require("@prisma/client");
+
+//pg and adapter-pg is used since both are required now in prisma 7
+//we can use accelerateUrl as an alternative but it is paid service by prisma
+//so we will opt using native and traditional self hosted db connection
+//pg and adapter-pg
 const { Pool } = require("pg");
 const { PrismaPg } = require("@prisma/adapter-pg");
 
@@ -11,11 +16,12 @@ const { PrismaPg } = require("@prisma/adapter-pg");
 const userRoutes = require("./routes/user_routes");
 const personRoutes = require("./routes/person_routes");
 
+//create PostgreSQL pool
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
 
-//connecting prisma to postgresql
+//create adapter and prisma client
 const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
